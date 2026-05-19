@@ -1,0 +1,110 @@
+.barra-ver {
+	background-color: #115842;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 3px 3px rgba(202, 202, 202, 0.5);
+	font-weight: 600;
+	color: white;
+}
+
+.img-t {
+    margin-left: 10px;
+    object-fit: cover;
+    height: 30px;
+    width: 30px;
+}
+
+.prod {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 80%;
+    margin: 50px auto;
+}
+
+.circulo {
+    width: 180px;
+    height: 180px;
+    background: #1e3932;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo img {
+    width: 160px;
+    border-radius: 50%;
+}
+
+.info {
+    flex: 1;
+}
+
+.info h2 {
+    margin-bottom: 10px;
+}
+
+.info p {
+    color: #666;
+    margin: 4px 0;
+}
+
+.precio {
+    margin-top: 10px;
+}
+
+.nuevo {
+    color: #006241;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.viejo {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.controles {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.cant { /*cantidad*/
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.cant button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.cant span {
+    padding: 0 10px;
+}
+
+.agregar {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #999;
+    background: none;
+    color: #999;
+    transition: 0.3s ease;
+}
+
+.agregar:hover {
+    background: #006241;
+    color: white;
+    cursor: pointer;
+}

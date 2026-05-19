@@ -1,0 +1,153 @@
+.barra-ver {
+	background-color: #115842;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 3px 3px rgba(202, 202, 202, 0.5);
+	font-weight: 600;
+	color: white;
+}
+
+form {
+	margin-top: 30px;
+}
+
+h2 {
+	margin-bottom: 5px;
+}
+
+h2 span {
+	font-size: 14px;
+	color: gray;
+}
+
+p {
+	color: gray;
+	margin-bottom: 25px;
+}
+
+.campo {
+	margin-bottom: 30px;
+}
+
+.campo input {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 5px;
+	font-size: 16px;
+	outline: none;
+}
+
+.campo label {
+	color: gray;
+	font-size: 12px;
+}
+
+.campo input:focus {
+	border-bottom: 1px solid #006241;
+}
+
+button {
+	background: #006241;
+	color: white;
+	border: none;
+	padding: 12px 25px;
+	border-radius: 20px;
+	cursor: pointer;
+	float: right;
+	font-size: 16px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	transition: 0.3s ease;
+}
+
+button:hover {
+	background: #004d33;
+}
+
+#msg {
+    position: fixed;
+    bottom: 20px;
+	left: 20px;
+    min-width: 300px;
+    max-width: 600px;
+    padding: 18px 40px;
+    border: 4px solid #115842;
+    border-radius: 20px;
+    background: white;
+    color: #115842;
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#msg.show {
+    opacity: 1;
+}
+
+#msg.error {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+#msg.good {
+    border-color: #115842;
+    color: #115842;
+}
+
+/* no logramos que esto nos funcionara
+.titulo {
+	color: white;
+}
+
+.switch-link {
+	display: block;
+	text-align: center;
+	margin-top: 15px;
+	color: #3483fa;
+	text-decoration: none;
+}
+
+.form-btn {
+	width: 100%;
+	padding: 12px;
+	background: #3483fa;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background: #2968c8;
+}
+
+.caja-form, .caja-form2, .caja-t{
+	display: none;
+}
+
+#login, #login-t {
+	display: block;
+}
+
+#reg:target {
+	display: block;
+}
+
+#reg:target~#login {
+	display: none;
+}
+
+#login:target {
+	display: block;
+}
+
+#login:target~#reg {
+	display: none;
+}
+*/
