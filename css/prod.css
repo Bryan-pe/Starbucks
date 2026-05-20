@@ -52,3 +52,13 @@
     color: white;
     cursor: pointer;
 }
+
+.nuevo {
+    color: #006241;
+    margin-right: 10px;
+}
+
+.nuevo span { /*viejo*/
+    text-decoration: line-through;
+    color: gray;
+}
