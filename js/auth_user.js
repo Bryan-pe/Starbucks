@@ -1,6 +1,6 @@
 //en caso de ya estar logueado redirige al index
 document.addEventListener("DOMContentLoaded", function(){
-    const user = localStorage.getItem("user_logueado")
+    const user = localStorage.getItem("user_logueado");
 
     if(user){
         window.location.href = "index.html";

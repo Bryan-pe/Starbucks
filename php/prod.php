@@ -1,29 +1,36 @@
+<?php
+    include("conexion.php");
+    $id = $_GET['id'];
+    $query = "SELECT * FROM bebidas WHERE id = $id";
+    $resul = $db->query($query);
+    $prod = $resul->fetchArray();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/prod.css">
-    <link rel="shortcut icon" href="css/logo.svg">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/prod.css">
+    <link rel="shortcut icon" href="../css/logo.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starbucks</title>
+    <title><?php echo $prod['nom']; ?></title>
 </head>
 <body>
     <header class="caja"> <!--navegador-->
         <div class="cont">
             <div class="logo-header">
-                <a href="index.html" class="logo">logo</a>
+                <a href="../index.html" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
-                        <a class="nav-a parte-izq" href="menu.html">MENU</a>
+                        <a class="nav-a parte-izq" href="menu.php">MENU</a>
                         <a class="nav-a parte-izq" href="#">REWARDS</a>
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
-                        <a class="nav-a" href="#"><img src="icons/maps.png"> Localizar Tienda</a>
-                        <a class="btn-w" href="login.html" id="login_link">Ingresar</a>
+                        <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
+                        <a class="btn-w" href="../login.html" id="login_link">Ingresar</a>
                         <a class="btn-w" href="#" id="logout_link" onclick="logout()" style="display: none;">Cerrar sesion</a>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="carrito.html"><img src="icons/carrito.png"></a>
+                        <a class="nav-a" href="../carrito.html"><img src="../icons/carrito.png"></a>
                     </div>
                 </div>
             </div>
@@ -31,15 +38,15 @@
     </header>
     <main class="caja">
         <div class="cont-prod">
-                <img src="img/Espresso.png">
+                <img src="<?php echo $prod['img']; ?>">
                 <div class="texto">
-                    <h1>Espresso</h1>
-                    <p>0 kcal <span class="info">i</span></p>
-                    <p class="nuevo">nuevo <span>viejo</span></p>
+                    <h1><?php echo $prod['nom']; ?></h1>
+                    <p><?php echo $prod['kcal']; ?> kcal <span class="info">i</span></p>
+                    <p class="nuevo">$<?php echo $prod['precio_n']; ?> | <span>$<?php echo $prod['precio_v']; ?></span></p>
                     <button class="agregar">+ Agregar artículo</button>
                 </div>
         </div>
-        <script src="js/log_user.js"></script>
+        <script src="../js/log_user.js"></script>
     </main>
     <footer class="caja">
         <div class="cont">
@@ -71,10 +78,10 @@
             <hr>
             <div class="mas redes"> <!--redes sociales-->
                 <ul>
-                    <li><a href="#"><img src="icons/face.png"></a></li>
-                    <li><a href="#"><img src="icons/insta.png"></a></li>
-                    <li><a href="#"><img src="icons/x.png"></a></li>
-                    <li><a href="#"><img src="icons/you.png"></a></li>
+                    <li><a href="#"><img src="../icons/face.png"></a></li>
+                    <li><a href="#"><img src="../icons/insta.png"></a></li>
+                    <li><a href="#"><img src="../icons/x.png"></a></li>
+                    <li><a href="#"><img src="../icons/you.png"></a></li>
                 </ul>
             </div>
             <div class="mas"> <!--mas botones-->
