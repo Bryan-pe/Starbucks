@@ -1,11 +1,8 @@
 <?php
     include("conexion.php");
-    $query1 = "SELECT * FROM bebidas WHERE tipo = 1";
-    $query2 = "SELECT * FROM bebidas WHERE tipo = 2";
-    $query3 = "SELECT * FROM bebidas WHERE tipo = 3";
-    $hot = $db->query($query1);
-    $cold = $db->query($query2);
-    $cafe = $db->query($query3);
+    $hot = $db->query("SELECT * FROM bebidas WHERE tipo_id = 1");
+    $cold = $db->query("SELECT * FROM bebidas WHERE tipo_id = 2");
+    $cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +29,7 @@
                         <a class="btn-w" href="../login.html" id="login_link">Ingresar</a>
                         <a class="btn-w" href="#" id="logout_link" onclick="logout()" style="display: none;">Cerrar sesion</a>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="../carrito.html"><img src="../icons/carrito.png"></a>
+                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
                     </div>
                 </div>
             </div>

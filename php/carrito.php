@@ -1,18 +1,19 @@
 <?php
     include("conexion.php");
-    $id = $_GET['id'];
-    $resul = $db->query("SELECT * FROM bebidas WHERE id = $id");
-    $prod = $resul->fetchArray();
+    //$id = $_GET['id'];
+    $carrito = $db->query("SELECT * FROM carrito_det join bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id");
+    //$resul = $db->query($query);
+    //$prod = $resul->fetchArray();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="stylesheet" href="../css/prod.css">
+    <link rel="stylesheet" href="../css/carrito.css">
     <link rel="shortcut icon" href="../css/logo.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $prod['nom']; ?></title>
+    <title>Starbucks</title>
 </head>
 <body>
     <header class="caja"> <!--navegador-->
@@ -21,7 +22,7 @@
                 <a href="../index.html" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
-                        <a class="nav-a parte-izq" href="menu.php">MENU</a>
+                        <a class="nav-a parte-izq" href="php/menu.php">MENU</a>
                         <a class="nav-a parte-izq" href="#">REWARDS</a>
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
@@ -29,21 +30,46 @@
                         <a class="btn-w" href="../login.html" id="login_link">Ingresar</a>
                         <a class="btn-w" href="#" id="logout_link" onclick="logout()" style="display: none;">Cerrar sesion</a>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="../carrito.html"><img src="../icons/carrito.png"></a>
+                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <section class="barra-ver">
+        <h2>Carrito</h2><img class="img-t" src="../icons/carrito2.png">
+    </section>
     <main class="caja">
-        <div class="cont-prod">
-                <img src="<?php echo $prod['img']; ?>">
-                <div class="texto">
-                    <h1><?php echo $prod['nom']; ?></h1>
-                    <p><?php echo $prod['kcal']; ?> kcal <span class="info">i</span></p>
-                    <p class="nuevo">$<?php echo $prod['precio_n']; ?> | <span>$<?php echo $prod['precio_v']; ?></span></p>
-                    <button class="agregar">+ Agregar artículo</button>
+        <div class="cont">
+            <?php while($prod = $carrito->fetchArray()){ ?>
+            <div class="prod">
+                
+                <div class="circulo">
+                    <img src="<?php echo $prod['img'] ?>">
                 </div>
+                <div class="info">
+                    <h2><?php echo $prod['nom'] ?></h2>
+                    <p>Tamaño: <?php echo $prod['size'] ?></p>
+                    <p>Crema batida: <?php echo $prod['crema'] ?></p>
+                    <p>Tipo de leche: <?php echo $prod['leche'] ?></p>
+                    <p>Tipo de Frappuccino: <?php echo $prod['frapp'] ?></p>
+                    <div class="precio">
+                        <span class="nuevo">$<?php echo $prod['precio_n'] ?></span>
+                        <span class="viejo">$<?php echo $prod['precio_v'] ?></span>
+                    </div>
+                </div>
+                <div class="controles">
+                    <div class="cant">
+                        <button>-</button>
+                        <span><?php echo $prod['cant'] ?></span>
+                        <button>+</button>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <?php } ?>
+            <button class="agregar">Comprar artículos</button>
         </div>
         <script src="../js/log_user.js"></script>
     </main>
