@@ -6,7 +6,7 @@
         die("Error de la conexion: ".$e->getMessage());
     }
 
-    function add($valor){
+    /*function add($valor){
         $db->exec("INSERT INTO carrito(usuario) VALUES($valor)");
     }
 
@@ -16,6 +16,6 @@
 
     function updt($tabla, $campo, $valor, $id){
         $db->exec("UPDATE $tabla SET $campo = $valor WHERE id = $id");
-    }
+    }*/
 ?>
 

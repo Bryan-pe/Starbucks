@@ -43,7 +43,6 @@
         <div class="cont">
             <?php while($prod = $carrito->fetchArray()){ ?>
             <div class="prod">
-                
                 <div class="circulo">
                     <img src="<?php echo $prod['img'] ?>">
                 </div>
@@ -65,11 +64,10 @@
                         <button>+</button>
                     </div>
                 </div>
-                
-                
+                <button class="agregar">Comprar artículos</button>
             </div>
             <?php } ?>
-            <button class="agregar">Comprar artículos</button>
+            <button class="agregar" style="margin-left: 80%;">Comprar artículos</button>
         </div>
         <script src="../js/log_user.js"></script>
     </main>

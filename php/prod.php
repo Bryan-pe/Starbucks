@@ -1,5 +1,6 @@
 <?php
     include("conexion.php");
+    include("add_carrito.php");
     $id = $_GET['id'];
     $resul = $db->query("SELECT * FROM bebidas WHERE id = $id");
     $prod = $resul->fetchArray();
@@ -29,7 +30,7 @@
                         <a class="btn-w" href="../login.html" id="login_link">Ingresar</a>
                         <a class="btn-w" href="#" id="logout_link" onclick="logout()" style="display: none;">Cerrar sesion</a>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="../carrito.html"><img src="../icons/carrito.png"></a>
+                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
                     </div>
                 </div>
             </div>
@@ -37,13 +38,15 @@
     </header>
     <main class="caja">
         <div class="cont-prod">
-                <img src="<?php echo $prod['img']; ?>">
-                <div class="texto">
-                    <h1><?php echo $prod['nom']; ?></h1>
-                    <p><?php echo $prod['kcal']; ?> kcal <span class="info">i</span></p>
-                    <p class="nuevo">$<?php echo $prod['precio_n']; ?> | <span>$<?php echo $prod['precio_v']; ?></span></p>
-                    <button class="agregar">+ Agregar artículo</button>
-                </div>
+            <img src="<?php echo $prod['img']; ?>">
+            <div class="texto">
+                <h1><?php echo $prod['nom']; ?></h1>
+                <p><?php echo $prod['kcal']; ?> kcal <span class="info">i</span></p>
+                <p class="nuevo">$<?php echo $prod['precio_n']; ?> | <span>$<?php echo $prod['precio_v']; ?></span></p>
+                <form method="POST">
+                    <button type="submit" name="agregar" class="agregar">+ Agregar artículo</button>
+                </form>
+            </div>
         </div>
         <script src="../js/log_user.js"></script>
     </main>
