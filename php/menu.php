@@ -1,8 +1,8 @@
 <?php
-    include("conexion.php");
-    $hot = $db->query("SELECT * FROM bebidas WHERE tipo_id = 1");
-    $cold = $db->query("SELECT * FROM bebidas WHERE tipo_id = 2");
-    $cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
+include("conexion.php");
+$hot = $db->query("SELECT * FROM bebidas WHERE tipo_id = 1");
+$cold = $db->query("SELECT * FROM bebidas WHERE tipo_id = 2");
+$cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,6 +39,7 @@
         <div class="cont"> <!--cosa donde van las tarjetas-->
             <h2 id="log_user"></h2>
             <h1>Conoce nuestras bebidas y alimentos de temporada</h1>
+
             <h3 class="titulo-bebida">Bebidas calientes</h3>
             <div class="zona-bebidas">
                 <?php while($prod = $hot->fetchArray()){ ?>
@@ -52,6 +53,7 @@
                     </a>
                 <?php } ?>
             </div>
+
             <h3 class="titulo-bebida">Bebidas frias</h3>
             <div class="zona-bebidas">
                 <?php while($prod = $cold->fetchArray()){ ?>
@@ -65,6 +67,7 @@
                     </a>
                 <?php } ?>
             </div>
+
             <h3 class="titulo-bebida">Frappuccino cafe</h3>
             <div class="zona-bebidas">
                 <?php while($prod = $cafe->fetchArray()){ ?>
@@ -78,6 +81,7 @@
                     </a>
                 <?php } ?>
             </div>
+            
         </div>
         <script src="../js/log_user.js"></script>
     </main>

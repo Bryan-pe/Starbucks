@@ -1,9 +1,8 @@
 <?php
-    include("conexion.php");
-    //$id = $_GET['id'];
-    $carrito = $db->query("SELECT * FROM carrito_det join bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id");
-    //$resul = $db->query($query);
-    //$prod = $resul->fetchArray();
+include("conexion.php");
+include("buy_carrito.php");
+$carrito = $db->query("SELECT * FROM carrito_det join bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id JOIN carrito on carrito_det.carrito = carrito.id WHERE estado = 'abierto'");
+$todo=0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,7 +21,7 @@
                 <a href="../index.html" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
-                        <a class="nav-a parte-izq" href="php/menu.php">MENU</a>
+                        <a class="nav-a parte-izq" href="menu.php">MENU</a>
                         <a class="nav-a parte-izq" href="#">REWARDS</a>
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
@@ -54,20 +53,41 @@
                     <p>Tipo de Frappuccino: <?php echo $prod['frapp'] ?></p>
                     <div class="precio">
                         <span class="nuevo">$<?php echo $prod['precio_n'] ?></span>
+
+                        <?php $todo += $prod['precio_n'] * $prod['cant']; ?>
+
                         <span class="viejo">$<?php echo $prod['precio_v'] ?></span>
                     </div>
                 </div>
                 <div class="controles">
                     <div class="cant">
-                        <button>-</button>
+
+                        <form method="POST" action="act_carrito.php">
+                            <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
+                            <input type="hidden" name="accion" value="menos">
+                            <button type="submit">-</button>
+                        </form>
+
                         <span><?php echo $prod['cant'] ?></span>
-                        <button>+</button>
+
+                        <form method="POST" action="act_carrito.php">
+                            <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
+                            <input type="hidden" name="accion" value="mas">
+                            <button type="submit">+</button>
+                        </form>
+
                     </div>
                 </div>
-                <button class="agregar">Comprar artículos</button>
             </div>
+            <?php } 
+            if($todo>0){ ?>
+            <p class="nuevo" style="margin-left: 82%; font-size: 25px; margin-bottom: 5px;">Total: $<?php echo $todo ?></p>
+            <form method="POST">
+                <button type="submit" name="comprar" class="agregar" style="margin-left: 80%;">Comprar artículos</button>
+            </form>
+            <?php } else { ?>
+            <a class="agregar" style="margin-left: 80%;" href="menu.php">+ Agregar articulos</a>
             <?php } ?>
-            <button class="agregar" style="margin-left: 80%;">Comprar artículos</button>
         </div>
         <script src="../js/log_user.js"></script>
     </main>
