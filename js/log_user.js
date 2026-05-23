@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
-    const user = localStorage.getItem("user_logueado")
+    const user = localStorage.getItem("user_logueado");
     const login = document.getElementById("login_link");
-    const logout = document.getElementById("logout_link")
+    const logout = document.getElementById("logout_link");
 
     if(user){
         login.style.display = "none";

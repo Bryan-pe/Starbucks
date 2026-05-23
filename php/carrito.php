@@ -1,7 +1,15 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['id_usuario'])){
+    header("Location: login.php");
+    exit;
+}
+
+$id_user = $_SESSION['id_usuario'];
 include("conexion.php");
 include("buy_carrito.php");
-$carrito = $db->query("SELECT * FROM carrito_det join bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id JOIN carrito on carrito_det.carrito = carrito.id WHERE estado = 'abierto'");
+$carrito = $db->query("SELECT * FROM carrito_det JOIN bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id JOIN carrito on carrito_det.carrito = carrito.id WHERE estado = 'abierto' AND usuario = $id_user");
 $todo=0;
 ?>
 <!DOCTYPE html>
@@ -26,8 +34,11 @@ $todo=0;
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
                         <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
-                        <a class="btn-w" href="../login.html" id="login_link">Ingresar</a>
-                        <a class="btn-w" href="#" id="logout_link" onclick="logout()" style="display: none;">Cerrar sesion</a>
+                        <?php if(isset($_SESSION['id_usuario'])){ ?>
+                            <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
+                        <?php } else { ?>
+                            <a class="btn-w" href="login.php" id="login_link">Ingresar</a>
+                        <?php } ?>
                         <a class="btn-b" href="#">Únete</a>
                         <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
                     </div>

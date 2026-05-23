@@ -5,7 +5,7 @@ $id_car = $_POST['id_carrito'];
 $accion = $_POST['accion'];
 
 $res = $db->query("SELECT cant FROM carrito_det WHERE id_carrito_det = $id_car");
-$prod = $res->fetchArray(SQLITE3_ASSOC);
+$prod = $res->fetchArray();
 
 $cant = $prod['cant'];
 

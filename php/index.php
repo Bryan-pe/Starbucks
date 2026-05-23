@@ -1,15 +1,11 @@
 <?php
 session_start();
 include("conexion.php");
-$hot = $db->query("SELECT * FROM bebidas WHERE tipo_id = 1");
-$cold = $db->query("SELECT * FROM bebidas WHERE tipo_id = 2");
-$cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="stylesheet" href="../css/menu.css">
     <link rel="shortcut icon" href="../css/logo.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +15,7 @@ $cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
     <header class="caja"> <!--navegador-->
         <div class="cont">
             <div class="logo-header">
-                <a href="index.php" class="logo">logo</a>
+                <a href="index.html" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
                         <a class="nav-a parte-izq" href="menu.php">MENU</a>
@@ -40,57 +36,69 @@ $cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
         </div>
     </header>
     <main class="caja">
-        <div class="cont"> <!--cosa donde van las tarjetas-->
-            <?php if(isset($_SESSION['id_usuario'])){ ?>
-                <h2>¡Disfrútalos!, <?php echo $_SESSION['usuario'] ?></h2>
-            <?php } else { ?>
-                <h2>¡Disfrútalos!</h2>
-            <?php } ?>
-            
-            <h1>Conoce nuestras bebidas y alimentos de temporada</h1>
-
-            <h3 class="titulo-bebida">Bebidas calientes</h3>
-            <div class="zona-bebidas">
-                <?php while($prod = $hot->fetchArray()){ ?>
-                    <a href="prod.php?id=<?php echo $prod['id']; ?>">
-                        <div class="bebida">
-                            <div class="circulo">
-                                <img src="<?php echo $prod['img']; ?>">
-                            </div>
-                            <p><?php echo $prod['nom']; ?></p>
-                        </div>
-                    </a>
-                <?php } ?>
+        <div class="cont-main"> <!--cosa donde van las tarjetas-->
+            <div class="card" id="card1"> <!--1ra tarjeta-->
+                <div class="img">
+                    <img src="../img/cafe1.jpg">
+                </div>
+                <div class="text-cont">
+                    <div class="text">
+                        <h2>¡Hola PROteína!</h2>
+                        <p>Dale un plus a tus días con un Vainilla Protein Latte, Vainilla Sin Azúcar Protein Latte o un Matcha Protein Latte, helado o caliente.</p>
+                        <a href="#">Descubre mas</a>
+                    </div>
+                </div>
             </div>
-
-            <h3 class="titulo-bebida">Bebidas frias</h3>
-            <div class="zona-bebidas">
-                <?php while($prod = $cold->fetchArray()){ ?>
-                    <a href="prod.php?id=<?php echo $prod['id']; ?>">
-                        <div class="bebida">
-                            <div class="circulo">
-                                <img src="<?php echo $prod['img']; ?>">
-                            </div>
-                            <p><?php echo $prod['nom']; ?></p>
-                        </div>
-                    </a>
-                <?php } ?>
+            <div class="card reverse" id="card2"> <!--2da tarjeta-->
+                <div class="img">
+                    <img src="../img/cafe2.jpg">
+                </div>
+                <div class="text-cont">
+                    <div class="text">
+                        <h2>Un regreso que sabe a Lavanda</h2>
+                        <p>¡Tus favoritos regresaron! Ven por tu Lavanda Latte, Lavanda Latte Helado, Lavanda Frappuccino, Matcha Helado con Lavanda Cold Foam, 
+                            Mocha Blanco Lavanda Frappuccino y Vainilla Lavanda Latte.</p>
+                    </div>
+                </div>
             </div>
-
-            <h3 class="titulo-bebida">Frappuccino cafe</h3>
-            <div class="zona-bebidas">
-                <?php while($prod = $cafe->fetchArray()){ ?>
-                    <a href="prod.php?id=<?php echo $prod['id']; ?>">
-                        <div class="bebida">
-                            <div class="circulo">
-                                <img src="<?php echo $prod['img'] ?>">
-                            </div>
-                            <p><?php echo $prod['nom'] ?></p>
-                        </div>
-                    </a>
-                <?php } ?>
+            <div class="card" id="card3"> <!--3ra tarjeta-->
+                <div class="img">
+                    <img src="../img/cafe3.jpg">
+                </div>
+                <div class="text-cont">
+                    <div class="text">
+                        <h2>Recompensas todo el año</h2>
+                        <p>Sé parte de las recompensas que te da tu bebida favorita. Obtén más café gratis, promociones exclusivas, accesos a productos antes que nadie y más.</p>
+                    </div>
+                </div>
             </div>
-            
+            <div class="card reverse" id="card4"> <!--4ta tarjeta-->
+                <div class="img">
+                    <img src="../img/cafe4.jpg">
+                </div>
+                <div class="text-cont">
+                    <div class="text">
+                        <h2>¡Tus vasos y termos son bienvenidos!</h2>
+                        <p>Cada vez que eliges llevar tu vaso o termo para tomar tus bebidas obtienes $8 de descuento y ayudas a cuidar el planeta.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cont-card" >
+                <div class="card-info" id="card5">
+                    <div class="borde" id="borde1">
+                        <h2>Noticias<br><strong>Starbucks</strong></h2>
+                    </div>
+                    <p>Consulta los eventos más <br>recientes.</p>
+                    <a class="btn-v" href="#">Aqui</a>
+                </div>
+                <div class="card-info" id="card6">
+                    <div class="borde" id="borde2">
+                        <h2>Conoce nuestras<br><strong>Promociones</strong></h2>
+                    </div>
+                    <p>Términos y <br>condiciones.</p>
+                    <a class="btn-c" href="#">Ver mas</a>
+                </div>
+            </div>
         </div>
         <script src="../js/log_user.js"></script>
     </main>
@@ -124,10 +132,10 @@ $cafe = $db->query("SELECT * FROM bebidas WHERE tipo_id = 3");
             <hr>
             <div class="mas redes"> <!--redes sociales-->
                 <ul>
-                    <li><a href="#"><img src="../icons/face.png"></a></li>
-                    <li><a href="#"><img src="../icons/insta.png"></a></li>
-                    <li><a href="#"><img src="../icons/x.png"></a></li>
-                    <li><a href="#"><img src="../icons/you.png"></a></li>
+                    <li><a href="#"><img src="icons/face.png"></a></li>
+                    <li><a href="#"><img src="icons/insta.png"></a></li>
+                    <li><a href="#"><img src="icons/x.png"></a></li>
+                    <li><a href="#"><img src="icons/you.png"></a></li>
                 </ul>
             </div>
             <div class="mas"> <!--mas botones-->

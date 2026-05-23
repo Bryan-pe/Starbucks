@@ -1,20 +1,22 @@
 <?php
 session_start();
+if(isset($_SESSION['id_usuario'])){
+    header("Location: index.php");
+    exit;
+}
 include("conexion.php");
-include("add_carrito.php");
-$id = $_GET['id'];
-$resul = $db->query("SELECT * FROM bebidas WHERE id = $id");
-$prod = $resul->fetchArray();
+include("login_registro.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="stylesheet" href="../css/prod.css">
     <link rel="shortcut icon" href="../css/logo.svg">
+    <link rel="stylesheet" href="../css/login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $prod['nom']; ?></title>
+    <title>Starbucks</title>
 </head>
 <body>
     <header class="caja"> <!--navegador-->
@@ -27,32 +29,65 @@ $prod = $resul->fetchArray();
                         <a class="nav-a parte-izq" href="#">REWARDS</a>
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
-                        <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
-                        <?php if(isset($_SESSION['id_usuario'])){ ?>
-                            <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
-                        <?php } else { ?>
-                            <a class="btn-w" href="login.php" id="login_link">Ingresar</a>
-                        <?php } ?>
-                        <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                        <a class="nav-a" href="#"><img src="../icons/menu.png"></a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <section class="barra-ver">
+        <div id="login-t" class="caja-t">
+            <h2>Ingresa a tu cuenta</h2>
+        </div>
+        <div id="reg-t" class="caja-t" style="display: none;">
+            <h2>Registro</h2>
+        </div>
+    </section>
     <main class="caja">
-        <div class="cont-prod">
-            <img src="<?php echo $prod['img']; ?>">
-            <div class="texto">
-                <h1><?php echo $prod['nom']; ?></h1>
-                <p><?php echo $prod['kcal']; ?> kcal <span class="info">i</span></p>
-                <p class="nuevo">$<?php echo $prod['precio_n']; ?> | <span>$<?php echo $prod['precio_v']; ?></span></p>
+        <div class="cont"> 
+            <div id="login"> <!--login-->
                 <form method="POST">
-                    <button type="submit" name="agregar" class="agregar">+ Agregar artículo</button>
+                    <div class="campo">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email*" name="email" id="login_email" required>
+                    </div>
+                    <div class="campo">
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="Contraseña*" name="pass" id="login_pass" required>
+                    </div>
+
+                    <button type="submit" name="login">Ingresar</button>
+                    <button type="button" onclick="reg()">Crear cuenta</button>
                 </form>
             </div>
+            <div id="reg" style="display: none;"> <!--registro-->
+                <h2>Información personal <span>(*) campos obligatorios</span></h2>
+                <p>¡Regístrate y comienza a vivir la experiencia Starbucks Reward!</p>
+                <form method="POST">
+                    <div class="campo">
+                        <label>Nombre(s)</label>
+                        <input type="text" placeholder="Nombre(s)*" name="nom" id="nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label>Apellido paterno</label>
+                        <input type="text" placeholder="Apellido paterno*" name="ap" id="apellido" required>
+                    </div>
+                    <div class="campo">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email*" name="email" id="email" required>
+                    </div>
+                    <div class="campo">
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="Contraseña*" name="pass" id="pass" required>
+                    </div>
+                    <button type="submit" name="registrar">Registrarse</button>
+                    <button type="button" onclick="log()">Ya tengo cuenta</button>
+                </form>
+            </div>
+            <div id="msg"></div>
         </div>
-        <script src="../js/log_user.js"></script>
+        <script src="../js/auth_user.js"></script>
+        <script src="../js/css_login.js"></script> <!--el css no ocultaba el registro-->
     </main>
     <footer class="caja">
         <div class="cont">
@@ -84,10 +119,10 @@ $prod = $resul->fetchArray();
             <hr>
             <div class="mas redes"> <!--redes sociales-->
                 <ul>
-                    <li><a href="#"><img src="../icons/face.png"></a></li>
-                    <li><a href="#"><img src="../icons/insta.png"></a></li>
-                    <li><a href="#"><img src="../icons/x.png"></a></li>
-                    <li><a href="#"><img src="../icons/you.png"></a></li>
+                    <li><a href="#"><img src="icons/face.png"></a></li>
+                    <li><a href="#"><img src="icons/insta.png"></a></li>
+                    <li><a href="#"><img src="icons/x.png"></a></li>
+                    <li><a href="#"><img src="icons/you.png"></a></li>
                 </ul>
             </div>
             <div class="mas"> <!--mas botones-->
