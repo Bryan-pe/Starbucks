@@ -377,3 +377,19 @@ hr { /*esto es la ralla que casi no se ve*/
 h3, h4 {
     font-weight: lighter;
 }
+
+/* ------------------------------------------------------------- mas ------------------------------------------------------------- */
+.carrito-icono {
+    position: relative;
+}
+
+.contador {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}

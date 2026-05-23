@@ -86,7 +86,7 @@ include("login_registro.php");
             </div>
             <div id="msg"></div>
         </div>
-        <script src="../js/auth_user.js"></script>
+        <script src="../js/error.js"></script>
         <script src="../js/css_login.js"></script> <!--el css no ocultaba el registro-->
     </main>
     <footer class="caja">

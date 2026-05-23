@@ -73,7 +73,6 @@ $todo=0;
 
                         <form method="POST" >
                             <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
-                            <input type="hidden" name="accion" value="menos">
                             <button type="submit" name="menos">-</button>
                         </form>
 
@@ -81,7 +80,6 @@ $todo=0;
 
                         <form method="POST" >
                             <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
-                            <input type="hidden" name="accion" value="mas">
                             <button type="submit" name="mas">+</button>
                         </form>
 
@@ -97,8 +95,10 @@ $todo=0;
             <?php } else { ?>
             <a class="agregar" style="margin-left: 80%;" href="menu.php">+ Agregar articulos</a>
             <?php } ?>
+            <!--<div id="msg"></div>-->
         </div>
         <script src="../js/log_user.js"></script>
+        <script src="../js/error.js"></script>
     </main>
     <footer class="caja">
         <div class="cont">

@@ -15,6 +15,7 @@ if(isset($_POST["agregar"])){
         }
     
         $db->exec("INSERT INTO carrito_det(carrito, bebida) VALUES($id_carrito, $id_prod)");
+        //echo "<script> msg('Agregado al carrito', 'good'); <script>";
     } else {
         header("Location: login.php");
         exit;
@@ -46,12 +47,12 @@ if(isset($_POST['comprar'])){
             $db->exec("INSERT INTO compra_det(compra, bebida, cant, precio) VALUES($id_compra, $bebida, $cantidad, $precio)");
         }
         $db->exec("UPDATE carrito SET estado = 'comprado' WHERE id = $id_carrito");
+        //echo "<script> msg('Carrito comprado', 'good'); <script>";
     }
 }
 
 if(isset($_POST['mas'])){ //$accion == "mas"
     $id_car = $_POST['id_carrito'];
-    $accion = $_POST['accion'];
 
     $res = $db->query("SELECT cant FROM carrito_det WHERE id_carrito_det = $id_car");
     $prod = $res->fetchArray();
@@ -63,7 +64,6 @@ if(isset($_POST['mas'])){ //$accion == "mas"
 
 if(isset($_POST['menos'])){ //$accion == "menos"
     $id_car = $_POST['id_carrito'];
-    $accion = $_POST['accion'];
 
     $res = $db->query("SELECT cant FROM carrito_det WHERE id_carrito_det = $id_car");
     $prod = $res->fetchArray();

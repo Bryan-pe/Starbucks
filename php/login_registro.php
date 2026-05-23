@@ -19,6 +19,7 @@ if(isset($_POST['login'])){
         exit;
     } else {
         echo "Usuario o contraseña incorrectos";
+        //echo "<script> msg('Usuario o contraseña incorrectos', 'error'); <script>";
         exit;
     }
 }
@@ -35,10 +36,12 @@ if(isset($_POST['registrar'])){
     $user = $buscar->fetchArray();
     if(!$user){
         $db->exec("INSERT INTO usuarios(user, ap, gmail, pass) VALUES('$usuario', '$ap', '$gmail', '$pass')");
-        //echo "Usuario creado";
+        //echo "Usuario registrado correctamente";
+        //echo "<script> msg('Usuario registrado correctamente', 'good'); <script>";
         exit;
     } else {
         echo "Correo ya registrado";
+        //echo "<script> msg('Correo ya registrado', 'error'); <script>";
         exit;
     } 
 }

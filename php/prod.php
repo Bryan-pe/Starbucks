@@ -51,8 +51,10 @@ $prod = $resul->fetchArray();
                     <button type="submit" name="agregar" class="agregar">+ Agregar artículo</button>
                 </form>
             </div>
+            <!--<div id="msg"></div>-->
         </div>
         <script src="../js/log_user.js"></script>
+        <script src="../js/error.js"></script>
     </main>
     <footer class="caja">
         <div class="cont">
