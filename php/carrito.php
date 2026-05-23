@@ -1,14 +1,12 @@
 <?php
 session_start();
-
 if(!isset($_SESSION['id_usuario'])){
     header("Location: login.php");
     exit;
 }
-
-$id_user = $_SESSION['id_usuario'];
 include("conexion.php");
-include("buy_carrito.php");
+include("cosas_carrito.php");
+$id_user = $_SESSION['id_usuario'];
 $carrito = $db->query("SELECT * FROM carrito_det JOIN bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id JOIN carrito on carrito_det.carrito = carrito.id WHERE estado = 'abierto' AND usuario = $id_user");
 $todo=0;
 ?>
@@ -26,7 +24,7 @@ $todo=0;
     <header class="caja"> <!--navegador-->
         <div class="cont">
             <div class="logo-header">
-                <a href="../index.html" class="logo">logo</a>
+                <a href="index.php" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
                         <a class="nav-a parte-izq" href="menu.php">MENU</a>
@@ -73,18 +71,18 @@ $todo=0;
                 <div class="controles">
                     <div class="cant">
 
-                        <form method="POST" action="act_carrito.php">
+                        <form method="POST" >
                             <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
                             <input type="hidden" name="accion" value="menos">
-                            <button type="submit">-</button>
+                            <button type="submit" name="menos">-</button>
                         </form>
 
                         <span><?php echo $prod['cant'] ?></span>
 
-                        <form method="POST" action="act_carrito.php">
+                        <form method="POST" >
                             <input type="hidden" name="id_carrito" value="<?php echo $prod['id_carrito_det'] ?>">
                             <input type="hidden" name="accion" value="mas">
-                            <button type="submit">+</button>
+                            <button type="submit" name="mas">+</button>
                         </form>
 
                     </div>

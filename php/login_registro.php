@@ -1,6 +1,5 @@
 <?php
 include("conexion.php");
-
 if(isset($_POST['login'])){
     $gmail = $_POST['email'];
     $pass = $_POST['pass'];
@@ -8,9 +7,9 @@ if(isset($_POST['login'])){
     $temp = $db->prepare("SELECT * FROM usuarios WHERE gmail = :gmail");
     $temp->bindValue(":gmail", $gmail);
     $busca = $temp->execute();
-    $user = $busca->fetchArray(); //SQLITE3_ASSOC
+    $user = $busca->fetchArray();
 
-    if($user && $pass == $user['pass']){ //password_verify($pass, $user['pass']))
+    if($user && $pass == $user['pass']){
         // guardar sesión
         $_SESSION['id_usuario'] = $user['id'];
         $_SESSION['usuario'] = $user['user'];
@@ -22,9 +21,6 @@ if(isset($_POST['login'])){
     }
 }
 
-
-//$usuario = "steph";
-//$pass = "1234";
 if(isset($_POST['registrar'])){
     $nombre = $_POST['nom'];
     $ap = $_POST['ap'];
@@ -34,36 +30,14 @@ if(isset($_POST['registrar'])){
     $buscar = $db->query("SELECT * FROM usuarios WHERE gmail = $gmail");
     $user = $buscar->fetchArray();
     if(!$user){
-        // encriptar password
-        //$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
         $db->exec("INSERT INTO usuarios(nom, ap, gmail, pass) VALUES('$nom', '$ap', '$gmail', '$pass')");
-
-        echo "Usuario creado";
-        //header("Location: login.php")
-    }else{
+        //echo "Usuario creado";
+    } else {
         echo "Correo ya registrado";
         exit;
     } 
 }
 
-?>
-
-<?php
-
-//session_start();
-
-//if(!isset($_SESSION['id_usuario']))
-//{
-//    header("Location: login.php");
-//    exit;
-//}
-
-//echo "Hola " . $_SESSION['usuario'];
-
-?>
-
-<?php
 if(isset($_GET['cerrar'])){
     session_start();
     session_unset();

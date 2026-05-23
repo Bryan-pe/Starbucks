@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("conexion.php");
-include("add_carrito.php");
+include("cosas_carrito.php");
 $id = $_GET['id'];
 $resul = $db->query("SELECT * FROM bebidas WHERE id = $id");
 $prod = $resul->fetchArray();
