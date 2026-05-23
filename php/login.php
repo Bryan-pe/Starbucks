@@ -119,10 +119,10 @@ include("login_registro.php");
             <hr>
             <div class="mas redes"> <!--redes sociales-->
                 <ul>
-                    <li><a href="#"><img src="icons/face.png"></a></li>
-                    <li><a href="#"><img src="icons/insta.png"></a></li>
-                    <li><a href="#"><img src="icons/x.png"></a></li>
-                    <li><a href="#"><img src="icons/you.png"></a></li>
+                    <li><a href="#"><img src="../icons/face.png"></a></li>
+                    <li><a href="#"><img src="../icons/insta.png"></a></li>
+                    <li><a href="#"><img src="../icons/x.png"></a></li>
+                    <li><a href="#"><img src="../icons/you.png"></a></li>
                 </ul>
             </div>
             <div class="mas"> <!--mas botones-->

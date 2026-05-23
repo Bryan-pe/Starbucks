@@ -8,7 +8,7 @@ if(isset($_POST["agregar"])){
         $carrito = $db->query("SELECT * FROM carrito WHERE usuario = $id_user AND estado = 'abierto'")->fetchArray();
 
         if(!$carrito){
-            $db->exec("INSERT INTO carrito(usuario,estado) VALUES($id_user,'abierto')");
+            $db->exec("INSERT INTO carrito(usuario, estado) VALUES($id_user, 'abierto')");
             $id_carrito = $db->lastInsertRowID();
         }else{
             $id_carrito = $carrito["id"];
@@ -27,7 +27,7 @@ if(isset($_POST['comprar'])){
         $id_user = $_SESSION['id_usuario'];
         $carrito_abierto = $db->query("SELECT * FROM carrito WHERE usuario = $id_user AND estado = 'abierto'")->fetchArray();
         $id_carrito = $carrito_abierto["id"];
-        $prods = $db->query("SELECT * FROM carrito_det JOIN bebidas ON carrito_det.bebida = bebidas.id WHERE carrito_det.carrito = $id_carrito");
+        $prods = $db->query("SELECT * FROM carrito_det cd JOIN bebidas b ON cd.bebida = b.id WHERE carrito = $id_carrito");
         $total = 0;
 
         while($datos = $prods->fetchArray()){

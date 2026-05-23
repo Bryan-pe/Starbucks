@@ -1,13 +1,14 @@
 <?php
 include("conexion.php");
+
 if(isset($_POST['login'])){
     $gmail = $_POST['email'];
     $pass = $_POST['pass'];
 
     $temp = $db->prepare("SELECT * FROM usuarios WHERE gmail = :gmail");
     $temp->bindValue(":gmail", $gmail);
-    $busca = $temp->execute();
-    $user = $busca->fetchArray();
+    $buscar = $temp->execute();
+    $user = $buscar->fetchArray();
 
     if($user && $pass == $user['pass']){
         // guardar sesión
@@ -18,20 +19,24 @@ if(isset($_POST['login'])){
         exit;
     } else {
         echo "Usuario o contraseña incorrectos";
+        exit;
     }
 }
 
 if(isset($_POST['registrar'])){
-    $nombre = $_POST['nom'];
+    $usuario = $_POST['nom'];
     $ap = $_POST['ap'];
     $gmail = $_POST['email'];
     $pass = $_POST['pass'];
 
-    $buscar = $db->query("SELECT * FROM usuarios WHERE gmail = $gmail");
+    $temp = $db->prepare("SELECT * FROM usuarios WHERE gmail = :gmail");
+    $temp->bindValue(":gmail", $gmail);
+    $buscar = $temp->execute();
     $user = $buscar->fetchArray();
     if(!$user){
-        $db->exec("INSERT INTO usuarios(nom, ap, gmail, pass) VALUES('$nom', '$ap', '$gmail', '$pass')");
+        $db->exec("INSERT INTO usuarios(user, ap, gmail, pass) VALUES('$usuario', '$ap', '$gmail', '$pass')");
         //echo "Usuario creado";
+        exit;
     } else {
         echo "Correo ya registrado";
         exit;

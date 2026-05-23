@@ -15,7 +15,7 @@ include("conexion.php");
     <header class="caja"> <!--navegador-->
         <div class="cont">
             <div class="logo-header">
-                <a href="index.html" class="logo">logo</a>
+                <a href="index.php" class="logo">logo</a>
                 <div class="main-menu">
                     <div class="menu"> <!-- parte de la izquierda -->
                         <a class="nav-a parte-izq" href="menu.php">MENU</a>

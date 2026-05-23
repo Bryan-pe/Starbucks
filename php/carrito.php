@@ -7,7 +7,7 @@ if(!isset($_SESSION['id_usuario'])){
 include("conexion.php");
 include("cosas_carrito.php");
 $id_user = $_SESSION['id_usuario'];
-$carrito = $db->query("SELECT * FROM carrito_det JOIN bebidas ON carrito_det.bebida = bebidas.id JOIN size ON bebidas.size_id = size.id JOIN carrito on carrito_det.carrito = carrito.id WHERE estado = 'abierto' AND usuario = $id_user");
+$carrito = $db->query("SELECT * FROM carrito_det cd JOIN bebidas b ON cd.bebida = b.id JOIN size s ON b.size_id = s.id JOIN carrito c on cd.carrito = c.id WHERE estado = 'abierto' AND usuario = $id_user");
 $todo=0;
 ?>
 <!DOCTYPE html>
