@@ -5,6 +5,11 @@ include("cosas_carrito.php");
 $id = $_GET['id'];
 $resul = $db->query("SELECT * FROM bebidas WHERE id = $id");
 $prod = $resul->fetchArray();
+if(isset($_SESSION['id_usuario'])){
+    $id_user = $_SESSION['id_usuario'];
+    $cuantos = $db->query("SELECT sum(cant) FROM carrito_det cd JOIN carrito c on cd.carrito = c.id WHERE estado = 'abierto' AND usuario = $id_user");
+    $en_carrito = $cuantos->fetchArray();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,13 +33,22 @@ $prod = $resul->fetchArray();
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
                         <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
-                        <?php if(isset($_SESSION['id_usuario'])){ ?>
+                        <?php if(isset($_SESSION['id_usuario'])){ ?> <!-- si el usuario esta logueado el boton de ingresar cambia a cerrar sesion -->
                             <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
                         <?php } else { ?>
                             <a class="btn-w" href="login.php" id="login_link">Ingresar</a>
                         <?php } ?>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                        <span class="carrito-icono" >
+                            <?php if(isset($_SESSION['id_usuario'])){ ?> <!-- si el usuario esta logueado se vera cunatos articulos hay en el carrito -->
+                                <a class="nav-a" href="carrito.php">
+                                    <img src="../icons/carrito.png">
+                                    <span id="contador-carrito" class="contador"><?php echo $en_carrito['sum(cant)'] ?? 0; ?></span>
+                                </a>
+                            <?php } else { ?>
+                                <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                            <?php } ?>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -51,10 +65,12 @@ $prod = $resul->fetchArray();
                     <button type="submit" name="agregar" class="agregar">+ Agregar artículo</button>
                 </form>
             </div>
-            <!--<div id="msg"></div>-->
+            <script src="../js/error.js"></script>
+            <?php if(isset($_SESSION['good'])){ $texto = $_SESSION['good']; unset($_SESSION['good']);?> <!--muestra un mensaje al agregar un producto al carrito -->
+                <div id="msg" class="show good"><?php echo $texto; ?></div>
+            <?php } ?>
         </div>
         <script src="../js/log_user.js"></script>
-        <script src="../js/error.js"></script>
     </main>
     <footer class="caja">
         <div class="cont">

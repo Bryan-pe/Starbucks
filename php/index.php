@@ -1,6 +1,11 @@
 <?php
 session_start();
 include("conexion.php");
+if(isset($_SESSION['id_usuario'])){
+    $id_user = $_SESSION['id_usuario'];
+    $cuantos = $db->query("SELECT sum(cant) FROM carrito_det cd JOIN carrito c on cd.carrito = c.id WHERE estado = 'abierto' AND usuario = $id_user");
+    $en_carrito = $cuantos->fetchArray();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,13 +28,22 @@ include("conexion.php");
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
                         <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
-                        <?php if(isset($_SESSION['id_usuario'])){ ?>
+                        <?php if(isset($_SESSION['id_usuario'])){ ?> <!-- si el usuario esta logueado el boton de ingresar cambia a cerrar sesion -->
                             <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
                         <?php } else { ?>
                             <a class="btn-w" href="login.php" id="login_link">Ingresar</a>
                         <?php } ?>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                        <span class="carrito-icono" >
+                            <?php if(isset($_SESSION['id_usuario'])){ ?> <!-- si el usuario esta logueado se vera cunatos articulos hay en el carrito -->
+                                <a class="nav-a" href="carrito.php">
+                                    <img src="../icons/carrito.png">
+                                    <span id="contador-carrito" class="contador"><?php echo $en_carrito['sum(cant)'] ?? 0; ?></span>
+                                </a>
+                            <?php } else { ?>
+                                <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                            <?php } ?>
+                        </span>
                     </div>
                 </div>
             </div>

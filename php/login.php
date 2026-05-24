@@ -7,7 +7,6 @@ if(isset($_SESSION['id_usuario'])){
 include("conexion.php");
 include("login_registro.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,9 +83,13 @@ include("login_registro.php");
                     <button type="button" onclick="log()">Ya tengo cuenta</button>
                 </form>
             </div>
-            <div id="msg"></div>
+            <script src="../js/error.js"></script>
+            <?php if(isset($_SESSION['error'])){ $texto = $_SESSION['error']; unset($_SESSION['error']);?>
+                <div id="msg" class="show error"><?php echo $texto; ?></div>
+            <?php } elseif(isset($_SESSION['good'])){ $texto = $_SESSION['good']; unset($_SESSION['good']);?>
+                <div id="msg" class="show good"><?php echo $texto; ?></div>
+            <?php } ?>
         </div>
-        <script src="../js/error.js"></script>
         <script src="../js/css_login.js"></script> <!--el css no ocultaba el registro-->
     </main>
     <footer class="caja">

@@ -10,7 +10,7 @@ if(isset($_POST['login'])){
     $buscar = $temp->execute();
     $user = $buscar->fetchArray();
 
-    if($user && $pass == $user['pass']){
+    if($user && $pass == $user['pass']){ //busca si existe el usuario y en caso de que si, revisa si la contraseña es correcta
         // guardar sesión
         $_SESSION['id_usuario'] = $user['id'];
         $_SESSION['usuario'] = $user['user'];
@@ -18,10 +18,10 @@ if(isset($_POST['login'])){
         header("Location: index.php");
         exit;
     } else {
-        echo "Usuario o contraseña incorrectos";
-        //echo "<script> msg('Usuario o contraseña incorrectos', 'error'); <script>";
-        exit;
+        $_SESSION['error'] = 'Usuario o contraseña incorrectos';
     }
+    header("Location: login.php");
+    exit;
 }
 
 if(isset($_POST['registrar'])){
@@ -34,16 +34,14 @@ if(isset($_POST['registrar'])){
     $temp->bindValue(":gmail", $gmail);
     $buscar = $temp->execute();
     $user = $buscar->fetchArray();
-    if(!$user){
+    if(!$user){ //si no existe el correo se registra al usuario
         $db->exec("INSERT INTO usuarios(user, ap, gmail, pass) VALUES('$usuario', '$ap', '$gmail', '$pass')");
-        //echo "Usuario registrado correctamente";
-        //echo "<script> msg('Usuario registrado correctamente', 'good'); <script>";
-        exit;
+        $_SESSION['good'] = 'Usuario registrado correctamente';
     } else {
-        echo "Correo ya registrado";
-        //echo "<script> msg('Correo ya registrado', 'error'); <script>";
-        exit;
-    } 
+        $_SESSION['error'] = 'Correo ya registrado';
+    }
+    header("Location: login.php");
+    exit;
 }
 
 if(isset($_GET['cerrar'])){

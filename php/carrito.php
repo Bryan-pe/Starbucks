@@ -9,6 +9,9 @@ include("cosas_carrito.php");
 $id_user = $_SESSION['id_usuario'];
 $carrito = $db->query("SELECT * FROM carrito_det cd JOIN bebidas b ON cd.bebida = b.id JOIN size s ON b.size_id = s.id JOIN carrito c on cd.carrito = c.id WHERE estado = 'abierto' AND usuario = $id_user");
 $todo=0;
+
+$cuantos = $db->query("SELECT sum(cant) FROM carrito_det cd JOIN carrito c on cd.carrito = c.id WHERE estado = 'abierto' AND usuario = $id_user");
+$en_carrito = $cuantos->fetchArray();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,13 +35,14 @@ $todo=0;
                     </div>
                     <div class="menu"> <!-- parte de la derecha -->
                         <a class="nav-a" href="#"><img src="../icons/maps.png"> Localizar Tienda</a>
-                        <?php if(isset($_SESSION['id_usuario'])){ ?>
-                            <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
-                        <?php } else { ?>
-                            <a class="btn-w" href="login.php" id="login_link">Ingresar</a>
-                        <?php } ?>
+                        <a class="btn-w" href="login_registro.php?cerrar=logout">Cerrar sesion</a>
                         <a class="btn-b" href="#">Únete</a>
-                        <a class="nav-a" href="carrito.php"><img src="../icons/carrito.png"></a>
+                        <span class="carrito-icono" >
+                            <a class="nav-a" href="carrito.php">
+                                <img src="../icons/carrito.png">
+                                <span id="contador-carrito" class="contador"><?php echo $en_carrito['sum(cant)'] ?? 0; ?></span>
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -49,7 +53,7 @@ $todo=0;
     </section>
     <main class="caja">
         <div class="cont">
-            <?php while($prod = $carrito->fetchArray()){ ?>
+            <?php while($prod = $carrito->fetchArray()){ ?> <!-- productos que hay en el carrito -->
             <div class="prod">
                 <div class="circulo">
                     <img src="<?php echo $prod['img'] ?>">
@@ -62,9 +66,7 @@ $todo=0;
                     <p>Tipo de Frappuccino: <?php echo $prod['frapp'] ?></p>
                     <div class="precio">
                         <span class="nuevo">$<?php echo $prod['precio_n'] ?></span>
-
                         <?php $todo += $prod['precio_n'] * $prod['cant']; ?>
-
                         <span class="viejo">$<?php echo $prod['precio_v'] ?></span>
                     </div>
                 </div>
@@ -87,15 +89,18 @@ $todo=0;
                 </div>
             </div>
             <?php } 
-            if($todo>0){ ?>
-            <p class="nuevo" style="margin-left: 82%; font-size: 25px; margin-bottom: 5px;">Total: $<?php echo $todo ?></p>
-            <form method="POST">
-                <button type="submit" name="comprar" class="agregar" style="margin-left: 80%;">Comprar artículos</button>
-            </form>
+            if($todo>0){ ?> <!-- en caso de no tener articulos en el carrito mostrara un boton para ir al menu -->
+                <p class="nuevo" style="margin-left: 82%; font-size: 25px; margin-bottom: 5px;">Total: $<?php echo $todo ?></p>
+                <form method="POST">
+                    <button type="submit" name="comprar" class="agregar" style="margin-left: 80%;">Comprar artículos</button>
+                </form>
             <?php } else { ?>
-            <a class="agregar" style="margin-left: 80%;" href="menu.php">+ Agregar articulos</a>
+                <a class="agregar" style="margin-left: 80%;" href="menu.php">+ Agregar articulos</a>
             <?php } ?>
-            <!--<div id="msg"></div>-->
+            <script src="../js/error.js"></script>
+            <?php if(isset($_SESSION['good'])){ $texto = $_SESSION['good']; unset($_SESSION['good']);?> <!-- muestra un mensaje al comprar el carrito -->
+                <div id="msg" class="show good"><?php echo $texto; ?></div>
+            <?php } ?>
         </div>
         <script src="../js/log_user.js"></script>
         <script src="../js/error.js"></script>
